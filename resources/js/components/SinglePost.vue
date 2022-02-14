@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss">
   .post {
-    margin: 50px 10px;
+    margin-bottom: 35px;
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
