@@ -11,27 +11,25 @@
           <label for="name">Nome</label>
           <input type="text" id="name" v-model="name" placeholder="Il tuo nome">
             <!-- errors.name è un array, devo stampare il primo elemento -->
-          <!-- <p class="errors" v-if="errors.name">
+          <p class="errors" v-if="errors.name">
             {{errors.name[0]}}
           </p>
-          <p v-else></p> -->
+
         </div>
         <div>
           <label for="email">Indirizzo email mittente</label>
           <input type="email" id="email" v-model="email" placeholder="Il tuo indirizzo email">
-          <!-- <p class="errors" v-if="errors.email">
+          <p class="errors" v-if="errors.email">
             {{errors.email[0]}}
           </p>
-          <p v-else></p> -->
 
         </div>
         <div>
           <label for="message">Messaggio</label>
           <textarea name="" id="message" v-model="message" cols="30" rows="10" placeholder="Testo della mail"></textarea>
-          <!-- <p class="errors" v-if="errors.message">
+          <p class="errors" v-if="errors.message">
             {{errors.message[0]}}
           </p>
-          <p v-else></p> -->
 
         </div>
         <button type="submit" :disabled="isSending">
@@ -75,9 +73,9 @@ export default {
         }else {
           this.success = true;
           this.errors = {};
-          // this.name = '';
-          // this.email = '';
-          // this.message = '';
+          this.name = '';
+          this.email = '';
+          this.message = '';
         }
       })
     }

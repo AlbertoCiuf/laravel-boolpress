@@ -1979,8 +1979,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Contacts',
   data: function data() {
@@ -2013,9 +2011,10 @@ __webpack_require__.r(__webpack_exports__);
           console.log(_this.errors);
         } else {
           _this.success = true;
-          _this.errors = {}; // this.name = '';
-          // this.email = '';
-          // this.message = '';
+          _this.errors = {};
+          _this.name = '';
+          _this.email = '';
+          _this.message = '';
         }
       });
     }
@@ -3919,6 +3918,14 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.errors.name
+              ? _c("p", { staticClass: "errors" }, [
+                  _vm._v(
+                    "\n          " + _vm._s(_vm.errors.name[0]) + "\n        "
+                  ),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c("div", [
@@ -3950,6 +3957,14 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.errors.email
+              ? _c("p", { staticClass: "errors" }, [
+                  _vm._v(
+                    "\n          " + _vm._s(_vm.errors.email[0]) + "\n        "
+                  ),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c("div", [
@@ -3981,6 +3996,16 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.errors.message
+              ? _c("p", { staticClass: "errors" }, [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm.errors.message[0]) +
+                      "\n        "
+                  ),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c("button", { attrs: { type: "submit", disabled: _vm.isSending } }, [
