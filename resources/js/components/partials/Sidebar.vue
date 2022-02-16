@@ -44,18 +44,32 @@ export default {
         cursor: pointer;
         display: inline-block;
         margin: 10px;
+        border-radius: 10px;
+        padding: 5px 7px;
+      }
+      &.categories span {
+        background-color: lightgreen;
         &:hover {
-          text-decoration: underline;
+          background-color: rgb(174, 233, 174);
+        }
+      }
+      &.tags span {
+        background-color: cornflowerblue;
+        &:hover {
+          background-color: rgb(130, 167, 235);
         }
       }
     }
     a.button {
-    text-decoration: none;
-    padding: 5px;
-    color: black;
-    background-color: #FAC20A;
-    border-radius: 5px;
-    cursor: pointer;
+      text-decoration: none;
+      padding: 5px;
+      color: black;
+      background-color: #FAC20A;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #e0c66f;
+      }
     }
   }
 </style>

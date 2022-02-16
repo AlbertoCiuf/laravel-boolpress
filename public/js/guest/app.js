@@ -1942,8 +1942,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Contacts'
+  name: 'Contacts',
+  data: function data() {
+    return {
+      name: '',
+      email: '',
+      message: '',
+      errors: {},
+      isSending: false,
+      success: false
+    };
+  },
+  methods: {
+    sendForm: function sendForm() {
+      var _this = this;
+
+      // console.log('form');
+      this.isSending = true;
+      this.success = false;
+      axios.post('api/contacts', {
+        'name': this.name,
+        'email': this.email,
+        'message': this.message
+      }).then(function (res) {
+        console.log(res.data);
+        _this.isSending = false;
+
+        if (!res.data.success) {
+          _this.errors = res.data.errors;
+          console.log(_this.errors);
+        } else {
+          _this.success = true;
+          _this.errors = {}; // this.name = '';
+          // this.email = '';
+          // this.message = '';
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2083,6 +2159,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2268,7 +2348,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "main.container[data-v-16000269] {\n  margin-top: 30px;\n}\nmain.container h1[data-v-16000269] {\n  padding-bottom: 20px;\n}", ""]);
+exports.push([module.i, "main.container[data-v-16000269] {\n  margin: 30px auto;\n}\nmain.container h1[data-v-16000269] {\n  padding-bottom: 20px;\n}\nmain.container h2[data-v-16000269] {\n  display: inline-block;\n  width: 40%;\n  color: green;\n  background-color: lightgreen;\n  border-radius: 10px;\n  margin-top: 30px;\n  padding: 10px 15px;\n}\nmain.container .form-contatti[data-v-16000269] {\n  margin: 50px 0;\n}\nmain.container .form-contatti div[data-v-16000269] {\n  margin-bottom: 15px;\n}\nmain.container .form-contatti div label[data-v-16000269] {\n  display: block;\n  margin-bottom: 5px;\n}\nmain.container .form-contatti div input[data-v-16000269], main.container .form-contatti div textarea[data-v-16000269] {\n  padding: 6px 8px;\n  width: 40%;\n}\nmain.container .form-contatti div .errors[data-v-16000269] {\n  font-size: 14px;\n  color: red;\n  padding-top: 10px;\n}\nmain.container .form-contatti button[data-v-16000269] {\n  text-decoration: none;\n  padding: 5px 10px;\n  color: black;\n  background-color: #FAC20A;\n  border-radius: 5px;\n  cursor: pointer;\n  border: none;\n  font-size: 16px;\n}\nmain.container .form-contatti button[data-v-16000269]:hover {\n  background-color: #e0c66f;\n}\nmain.container .form-contatti button.r[data-v-16000269] {\n  background-color: coral;\n}\nmain.container .form-contatti button.r[data-v-16000269]:hover {\n  background-color: lightcoral;\n}", ""]);
 
 // exports
 
@@ -2382,7 +2462,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "aside[data-v-438bbc0a] {\n  max-width: 30%;\n}\naside .box[data-v-438bbc0a] {\n  border: 2px solid cornflowerblue;\n  border-radius: 10px;\n  padding: 20px;\n  margin-bottom: 20px;\n}\naside .box span[data-v-438bbc0a] {\n  cursor: pointer;\n  display: inline-block;\n  margin: 10px;\n}\naside .box span[data-v-438bbc0a]:hover {\n  text-decoration: underline;\n}\naside a.button[data-v-438bbc0a] {\n  text-decoration: none;\n  padding: 5px;\n  color: black;\n  background-color: #FAC20A;\n  border-radius: 5px;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, "aside[data-v-438bbc0a] {\n  max-width: 30%;\n}\naside .box[data-v-438bbc0a] {\n  border: 2px solid cornflowerblue;\n  border-radius: 10px;\n  padding: 20px;\n  margin-bottom: 20px;\n}\naside .box span[data-v-438bbc0a] {\n  cursor: pointer;\n  display: inline-block;\n  margin: 10px;\n  border-radius: 10px;\n  padding: 5px 7px;\n}\naside .box.categories span[data-v-438bbc0a] {\n  background-color: lightgreen;\n}\naside .box.categories span[data-v-438bbc0a]:hover {\n  background-color: #aee9ae;\n}\naside .box.tags span[data-v-438bbc0a] {\n  background-color: cornflowerblue;\n}\naside .box.tags span[data-v-438bbc0a]:hover {\n  background-color: #82a7eb;\n}\naside a.button[data-v-438bbc0a] {\n  text-decoration: none;\n  padding: 5px;\n  color: black;\n  background-color: #FAC20A;\n  border-radius: 5px;\n  cursor: pointer;\n}\naside a.button[data-v-438bbc0a]:hover {\n  background-color: #e0c66f;\n}", ""]);
 
 // exports
 
@@ -3797,20 +3877,129 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", { staticClass: "container" }, [
+    _c("h1", [_vm._v("Contatti Vue")]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Pagina 'Contatti' con Componente di Vue.")]),
+    _vm._v(" "),
+    _vm.success ? _c("h2", [_vm._v("Email inviata correttamente")]) : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-contatti" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.sendForm.apply(null, arguments)
+            },
+          },
+        },
+        [
+          _c("div", [
+            _c("label", { attrs: { for: "name" } }, [_vm._v("Nome")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name",
+                },
+              ],
+              attrs: { type: "text", id: "name", placeholder: "Il tuo nome" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "email" } }, [
+              _vm._v("Indirizzo email mittente"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email",
+                },
+              ],
+              attrs: {
+                type: "email",
+                id: "email",
+                placeholder: "Il tuo indirizzo email",
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "message" } }, [_vm._v("Messaggio")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.message,
+                  expression: "message",
+                },
+              ],
+              attrs: {
+                name: "",
+                id: "message",
+                cols: "30",
+                rows: "10",
+                placeholder: "Testo della mail",
+              },
+              domProps: { value: _vm.message },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.message = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("button", { attrs: { type: "submit", disabled: _vm.isSending } }, [
+            _vm._v(
+              "\n        " +
+                _vm._s(_vm.isSending ? "Invio in corso" : "Invia") +
+                "\n      "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "r", attrs: { type: "reset" } }, [
+            _vm._v("Reset"),
+          ]),
+        ]
+      ),
+    ]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Contatti Vue")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Pagina 'Contatti' con Componente di Vue.")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3965,9 +4154,13 @@ var render = function () {
     [
       _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
       _vm._v(" "),
+      _c("img", {
+        attrs: { width: "350", src: _vm.post.cover, alt: _vm.post.title },
+      }),
+      _vm._v(" "),
       _vm.post.category
-        ? _c("small", [
-            _vm._v("Categoria: "),
+        ? _c("small", { staticStyle: { display: "block" } }, [
+            _vm._v("\n    Categoria: "),
             _c("em", [_vm._v(_vm._s(_vm.post.category.name))]),
           ])
         : _vm._e(),

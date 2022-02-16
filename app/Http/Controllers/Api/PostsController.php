@@ -12,6 +12,16 @@ class PostsController extends Controller
 {
     public function index() {
       $posts = Post::all();
+
+      //con each, stesso funzionamento di un foreach, imposto la cover ad ogni singolo post; se non esiste, imposto l'immagine placeholder presente in public/img
+        // $posts->each(function($post){
+        //   if($post->cover) {
+        //     $post->cover = url('storage/' . $post->cover);
+        //   }else {
+        //     $post->cover = url('img/download.png');
+        //   }
+        // });
+
       $tags = Tag::all();
       $categories = Category::all();
       return response()->json(compact('posts', 'tags', 'categories'));
@@ -19,6 +29,12 @@ class PostsController extends Controller
 
     public function show($slug) {
       $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
+
+      if($post->cover) {
+        $post->cover = url('storage/' . $post->cover);
+      }else {
+        $post->cover = url('img/download.png');
+      }
 
       if(!$post) {
         $post = [

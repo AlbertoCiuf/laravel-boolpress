@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::namespace('Api')
-      ->prefix('posts')
       ->group(function(){
-          Route::get('/', 'PostsController@index');
-          Route::get('{slug}', 'PostsController@show');
-          Route::get('postcategory/{slug}', 'PostsController@getPostsByCategory');
-          Route::get('posttag/{slug}', 'PostsController@getPostsByTag');
+          //posts
+          Route::get('/posts', 'PostsController@index');
+          Route::get('posts/{slug}', 'PostsController@show');
+          Route::get('posts/postcategory/{slug}', 'PostsController@getPostsByCategory');
+          Route::get('posts/posttag/{slug}', 'PostsController@getPostsByTag');
+          
+          //contacts
+          Route::post('contacts/', 'ContactController@store');
       });

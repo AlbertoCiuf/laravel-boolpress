@@ -24,6 +24,15 @@
       n/a
     @endforelse
   </h4>
+
+  @if ($post->cover)
+    <div class="image">
+      {{-- concateno ad asset/ il nome del file presente nel db (colonna cover) --}}
+      <img width="350" src="{{asset('storage/' . $post->cover)}}" alt="{{$post->cover_original_name}}">
+      <p>{{$post->cover_original_name}}</p>
+    </div>
+  @endif
+
   <p>
     {{$post->content}}
   </p>

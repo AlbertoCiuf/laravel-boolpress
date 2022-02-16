@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -45,16 +46,26 @@ class PostsController extends Controller
       $request->validate(
       [
         'title' => 'required|min:2|max:255',
-        'content' => 'min:5'
+        'content' => 'min:5',
+        'cover' => 'nullable|image|max:32000'
       ],
       [
         'title.required' => 'Il titolo è un campo obbligatorio.',
         'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
         'title.max' => 'Il titolo deve essere lungo massimo :max caratteri',
-        'content.min' => 'Il contenuto deve essere lungo almeno :min caratteri'
+        'content.min' => 'Il contenuto deve essere lungo almeno :min caratteri',
+        'cover.image' => 'Il file deve essere un\'immagine',
+        'cover.max' => 'File troppo grande'
       ]);
       
         $data = $request->all();
+
+        if(array_key_exists('cover', $data)) {
+          $data['cover_original_name'] = $request->file('cover')->getClientOriginalName();
+          $imgPath = Storage::put('uploads', $data['cover']);
+          $data['cover'] = $imgPath;
+        }
+
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->slug = Post::generateUniqueSlug($newPost->title);
@@ -108,19 +119,34 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $request->validate(
-          [
-            'title' => 'required|min:2|max:255',
-            'content' => 'min:5'
-          ],
-          [
-            'title.required' => 'Il titolo è un campo obbligatorio.',
-            'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
-            'title.max' => 'Il titolo deve essere lungo massimo :max caratteri',
-            'content.min' => 'Il contenuto deve essere lungo almeno :min caratteri'
-          ]);
+      $request->validate(
+        [
+          'title' => 'required|min:2|max:255',
+          'content' => 'min:5',
+          'cover' => 'nullable|image|max:32000'
+        ],
+        [
+          'title.required' => 'Il titolo è un campo obbligatorio.',
+          'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
+          'title.max' => 'Il titolo deve essere lungo massimo :max caratteri',
+          'content.min' => 'Il contenuto deve essere lungo almeno :min caratteri',
+          'cover.image' => 'Il file deve essere un\'immagine',
+          'cover.max' => 'File troppo grande'
+        ]);
 
           $data = $request->all();
+
+
+          if(array_key_exists('cover', $data)) {
+            if ($post->cover) {
+              Storage::delete($post->cover);
+            }
+            $data['cover_original_name'] = $request->file('cover')->getClientOriginalName();
+            $imgPath = Storage::put('uploads', $data['cover']);
+            $data['cover'] = $imgPath;
+          }
+
+
           if ($data['title'] != $post->title) {
             $data['slug'] = Post::generateUniqueSlug($data['title']);
           }
@@ -144,6 +170,9 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->cover) {
+          Storage::delete($post->cover);
+        }
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato correttamente');
     }

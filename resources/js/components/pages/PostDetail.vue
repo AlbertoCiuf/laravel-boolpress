@@ -1,7 +1,11 @@
 <template>
   <main class="container">
     <h1>{{post.title}}</h1>
-    <small v-if="post.category">Categoria: <em>{{post.category.name}}</em></small>
+    <img width="350" :src="post.cover" :alt="post.title">
+    <small style="display:block" 
+    v-if="post.category">
+      Categoria: <em>{{post.category.name}}</em>
+    </small>
     <p>{{post.content}}</p>
     <ul v-if="post.tags">
       <li v-for="(tag, index) in post.tags" :key="`tag${index}`">

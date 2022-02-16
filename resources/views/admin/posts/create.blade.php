@@ -18,7 +18,7 @@
     </div>
   @endif
 
-  <form action="{{route('admin.posts.store')}}" method="post">
+  <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="title" class="form-label">Titolo</label>
@@ -74,6 +74,17 @@
         </div>
       @endforeach
     </div>
+
+
+    <div class="mb-3">
+      <label for="cover" class="form-label">Immagine</label>
+      <input type="file" name="cover" id="cover" class="form-control @error('cover') is-invalid @enderror">
+    </div>
+    @error('cover')
+      <div class="text-danger">
+        {{$message}}
+      </div>
+    @enderror
 
     <button type="submit" class="btn btn-primary">Invia</button>
     <button type="reset" class="btn btn-secondary">Reset</button>
